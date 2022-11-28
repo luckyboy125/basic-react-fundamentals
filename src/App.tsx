@@ -1,24 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { useStyles } from "./Style";
+import { ThemeContext } from "./theme/ThemeProvider";
 
 function App() {
+  const classes = useStyles();
+  const darkTheme = "darkTheme";
+  const lightTheme = "lightTheme";
+  const curThemeName = localStorage.getItem("appTheme") || "darkTheme";
+  const setThemeName = React.useContext(ThemeContext);
+  const [theme, setTheme] = useState(curThemeName);
+  const handleToggle = () => {
+    if (theme === lightTheme) {
+      setThemeName(darkTheme);
+      setTheme(darkTheme);
+    } else {
+      setThemeName(lightTheme);
+      setTheme(lightTheme);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <div className={classes.left}>
+        <div onClick={handleToggle}> theme convert</div>
+      </div>
+      <div className={classes.right}>right part</div>
     </div>
   );
 }
