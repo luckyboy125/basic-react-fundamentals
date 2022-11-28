@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import ActionButton from "./component/ActionButton/ActionButton";
 import { useStyles } from "./Style";
 import { ThemeContext } from "./theme/ThemeProvider";
 
@@ -23,7 +24,11 @@ function App() {
   return (
     <div className={classes.root}>
       <div className={classes.left}>
-        <div onClick={handleToggle}> theme convert</div>
+        <ActionButton
+          action={handleToggle}
+          content="Toggle Theme"
+          className={classes.topBtn}
+        />
       </div>
       <div className={classes.right}>right part</div>
     </div>

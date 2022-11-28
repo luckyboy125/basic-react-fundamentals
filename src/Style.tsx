@@ -13,6 +13,9 @@ export const useStyles = makeStyles((theme: Theme) =>
       textAlign: "center",
       background: theme.palette.background.default,
     },
+    topBtn: {
+      margin: "auto",
+    },
     right: {
       padding: "50px",
       minHeight: "100vh",
