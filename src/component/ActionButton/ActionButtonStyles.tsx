@@ -14,7 +14,7 @@ export const ActionButtonStyles = makeStyles((theme: Theme) =>
       boxShadow: "5px 5px 10px rgb(0 0 0 / 20%)",
       transitionDelay: "0ms",
       transitionDuration: "600ms",
-      padding: "12px 48px",
+      padding: "10px 15px",
       "& i": {
         marginLeft: "5px",
         fontSize: "13px",

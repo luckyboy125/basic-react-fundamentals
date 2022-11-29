@@ -5,10 +5,29 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { useStyles } from "./Style";
 import { ThemeContext } from "./theme/ThemeProvider";
 
+interface rightPartProps {
+  date: string;
+  des: string;
+}
+
 function App() {
   const classes = useStyles();
   const [des, setDes] = useState("");
   const buttonArray = [0, 1, 2, 3, 4];
+  const rightPartArray: rightPartProps[] = [
+    {
+      date: "02/04/22 10:02:34",
+      des: "Theme was set to Dark",
+    },
+    {
+      date: "02/04/22 10:02:34",
+      des: "Theme was set to Dark",
+    },
+    {
+      date: "02/04/22 10:02:34",
+      des: "Theme was set to Dark",
+    },
+  ];
 
   const darkTheme = "darkTheme";
   const lightTheme = "lightTheme";
@@ -66,7 +85,16 @@ function App() {
           })}
         </div>
       </div>
-      <div className={classes.right}>right part</div>
+      <div className={classes.right}>
+        {rightPartArray.map((item: rightPartProps, index) => {
+          return (
+            <div key={index} className={classes.item}>
+              <span className={classes.msgDate}>{item.date}</span>
+              <span className={classes.msgDes}>{item.des}</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

@@ -74,5 +74,26 @@ export const useStyles = makeStyles((theme: Theme) =>
       width: "50%",
       background: theme.palette.background.paper,
     },
+    item: {
+      padding: "10px",
+      display: "flex",
+      alignItems: "center",
+    },
+    msgDate: {
+      width: "150px",
+      fontFamily: "Montserrat",
+      fontWeight: "normal",
+      fontSize: "16px",
+      color: theme.palette.primary.contrastText,
+    },
+    msgDes: {
+      flexGrow: 1,
+      fontFamily: "Montserrat",
+      fontWeight: "normal",
+      fontSize: "16px",
+      marginLeft: "10px",
+      textAlign: "start",
+      color: theme.palette.primary.contrastText,
+    },
   })
 );
