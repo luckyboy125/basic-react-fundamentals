@@ -59,10 +59,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       marginTop: "10px",
     },
     thirdPart: {
-      display: "flex",
-      alignItems: "center",
       padding: "50px 0",
-      flexFlow: "wrap",
     },
     increaseBtn: {
       margin: "5px 0 0 5px",

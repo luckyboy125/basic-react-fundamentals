@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import "./App.css";
 import ActionButton from "./component/ActionButton/ActionButton";
 import { themeType } from "./config/const";
 import { currentDate } from "./config/utils";
-import { useStyles } from "./Style";
+import { useStyles } from "./AppStyle";
 import { ThemeContext } from "./theme/ThemeProvider";
 
 interface rightPartProps {
@@ -35,11 +34,11 @@ function App() {
     if (theme === themeType.light) {
       setThemeName(themeType.dark);
       setTheme(themeType.dark);
-      addMessageHistory("Set Dark Theme");
+      addMessageHistory("Theme was set to dark");
     } else {
       setThemeName(themeType.light);
       setTheme(themeType.light);
-      addMessageHistory("Set Light Theme");
+      addMessageHistory("Theme was set to dark");
     }
   };
 
@@ -69,7 +68,9 @@ function App() {
         <div className={classes.firstPart}>
           <ActionButton
             action={handleToggle}
-            content="Toggle Theme"
+            content={`Set ${
+              theme === themeType.light ? "Dark" : "Light"
+            } Theme`}
             className={classes.topBtn}
           />
         </div>
