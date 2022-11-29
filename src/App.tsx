@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
 import ActionButton from "./component/ActionButton/ActionButton";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import { themeType } from "./config/const";
+import { currentDate } from "./config/utils";
 import { useStyles } from "./Style";
 import { ThemeContext } from "./theme/ThemeProvider";
 
@@ -13,39 +14,53 @@ interface rightPartProps {
 function App() {
   const classes = useStyles();
   const [des, setDes] = useState("");
-  const buttonArray = [0, 1, 2, 3, 4];
-  const rightPartArray: rightPartProps[] = [
-    {
-      date: "02/04/22 10:02:34",
-      des: "Theme was set to Dark",
-    },
-    {
-      date: "02/04/22 10:02:34",
-      des: "Theme was set to Dark",
-    },
-    {
-      date: "02/04/22 10:02:34",
-      des: "Theme was set to Dark",
-    },
-  ];
+  const [btnIdxs, setBtnIdxArray] = useState<number[]>([0]);
+  const [rightMsg, setRightMsg] = useState<rightPartProps[]>([]);
 
-  const darkTheme = "darkTheme";
-  const lightTheme = "lightTheme";
-  const curThemeName = localStorage.getItem("appTheme") || "darkTheme";
+  const curThemeName = localStorage.getItem("appTheme") || themeType.light;
   const setThemeName = React.useContext(ThemeContext);
   const [theme, setTheme] = useState(curThemeName);
+
+  const addMessageHistory = (des: string) => {
+    setRightMsg((prevMsgs) => [
+      ...prevMsgs,
+      {
+        date: currentDate(),
+        des: des,
+      },
+    ]);
+  };
+
   const handleToggle = () => {
-    if (theme === lightTheme) {
-      setThemeName(darkTheme);
-      setTheme(darkTheme);
+    if (theme === themeType.light) {
+      setThemeName(themeType.dark);
+      setTheme(themeType.dark);
+      addMessageHistory("Set Dark Theme");
     } else {
-      setThemeName(lightTheme);
-      setTheme(lightTheme);
+      setThemeName(themeType.light);
+      setTheme(themeType.light);
+      addMessageHistory("Set Light Theme");
     }
+  };
+
+  const handleMsgSend = () => {
+    addMessageHistory(`Message Sent: ${des}`);
+    setDes("");
   };
 
   const handleDes = (e: any) => {
     setDes(e.target.value);
+  };
+
+  const addBtnIdxs = (idx: number) => {
+    if (idx + 1 < btnIdxs.length) {
+      addMessageHistory(`Button ${idx + 1} clicked`);
+    } else {
+      setBtnIdxArray((prevState) => {
+        return [...prevState, idx + 1];
+      });
+      addMessageHistory(`Button ${idx + 2} added`);
+    }
   };
 
   return (
@@ -60,6 +75,7 @@ function App() {
         </div>
         <div className={classes.secondPart}>
           <textarea
+            value={des}
             className={classes.descriptionTextField}
             aria-label="maximum height"
             placeholder="Some Description"
@@ -68,25 +84,25 @@ function App() {
             }}
           />
           <ActionButton
-            action={handleToggle}
+            action={handleMsgSend}
             content="Send"
             className={classes.sendBtn}
+            disable={des.length === 0}
           />
         </div>
         <div className={classes.thirdPart}>
-          {buttonArray.map((item) => {
-            return (
-              <ActionButton
-                action={handleToggle}
-                content={`Button ${item.toString()}`}
-                className={classes.increaseBtn}
-              />
-            );
-          })}
+          {btnIdxs.map((idx) => (
+            <ActionButton
+              key={idx}
+              action={() => addBtnIdxs(idx)}
+              content={`Button ${idx + 1}`}
+              className={classes.increaseBtn}
+            />
+          ))}
         </div>
       </div>
       <div className={classes.right}>
-        {rightPartArray.map((item: rightPartProps, index) => {
+        {rightMsg.map((item: rightPartProps, index) => {
           return (
             <div key={index} className={classes.item}>
               <span className={classes.msgDate}>{item.date}</span>

@@ -15,19 +15,8 @@ export const ActionButtonStyles = makeStyles((theme: Theme) =>
       transitionDelay: "0ms",
       transitionDuration: "600ms",
       padding: "10px 15px",
-      "& i": {
-        marginLeft: "5px",
-        fontSize: "13px",
-        lineHeight: "16px",
-        color: theme.palette.primary.dark,
-      },
       "&:hover": {
         boxShadow: "0px 0px 0px rgb(0 0 0 / 20%)",
-        "& i": {
-          marginLeft: "10px",
-          transitionDelay: "0ms",
-          transitionDuration: "600ms",
-        },
       },
       [theme.breakpoints.down(540)]: {
         padding: "12px 24px",

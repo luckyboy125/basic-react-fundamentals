@@ -26,7 +26,6 @@ export default function ActionButton({
       onClick={disable ? () => {} : action}
     >
       <p className={classes.des}>{content}</p>
-      <i className="fas fa-chevron-right"></i>
     </div>
   );
 }

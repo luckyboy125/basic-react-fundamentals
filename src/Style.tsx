@@ -80,9 +80,10 @@ export const useStyles = makeStyles((theme: Theme) =>
       alignItems: "center",
     },
     msgDate: {
-      width: "150px",
+      minWidth: "150px",
       fontFamily: "Montserrat",
       fontWeight: "normal",
+      textAlign: "start",
       fontSize: "16px",
       color: theme.palette.primary.contrastText,
     },
